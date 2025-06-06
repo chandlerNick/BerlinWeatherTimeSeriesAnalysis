@@ -1,5 +1,19 @@
 # Times Series Analysis (& Forecasting) of Weather Data
 
+
+
+# For Data Science workflow and Applications
+
+Use the weather time series data Theo collected.
+
+- Fine tune the lag-llama (also compare out of box perf)
+- Train LSTM for univariate TS w/ HPO
+
+
+
+
+## Preliminary Analysis
+
 Here I experiment with some time series analysis methods on weather data from a friend's at home weather station in Berlin.
 
 The sources I reference for the methods and notes are:
@@ -31,4 +45,20 @@ These components may be combined in different ways.
 eg. adding:
 
 y = level + trend + seasonality + noise
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
