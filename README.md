@@ -4,10 +4,13 @@
 
 # For Data Science workflow and Applications
 
-Use the weather time series data Theo collected.
+Use the weather time series data collected.
 
 - Fine tune the lag-llama (also compare out of box perf)
-- Train LSTM for univariate TS w/ HPO
+-     https://arxiv.org/pdf/2310.08278
+-     https://youtu.be/MOOPuizuf6o?si=ZopML7Mf2L0NAySF (for inference on foundation model -- still need to fine-tune it)
+- Train LSTM for univariate TS w/ CVHPO
+-     ChatGPT for tensorflow LSTM? Unless we have to use PyTorch but some diversity could be good. idk
 
 
 
