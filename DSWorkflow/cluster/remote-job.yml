@@ -1,0 +1,14 @@
+apiVersion: batch/v1 # Jobs are batch processing resources meant to run once or on a schedule
+kind: Job
+metadata:
+  name: dsw-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: dsw-job # You can name the container differently from the job e.g. dsw-job-container
+        image: python:3.10-slim # Download a lightweight Python image from Docker Hub
+        command: ["python"]
+        args: ["-c", "print('Hello from the cluster!')"]
+      restartPolicy: Never # Tells K8s to not restart the container, even if it fails. Values: {Never, OnFailure}
+  backoffLimit: 2 # Allows up to 2 retries before the Job is marked as 'Failed'

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherts
+spec:
+  replicas: 1 # Creates a single pod that is automatically restarted on crash
+  selector:
+    matchLabels:
+      app: weatherts
+  template:
+    metadata:
+      labels:
+        app: weatherts
+    spec:
+      containers:
+      - name: weatherts
+        image: chandlernick/dsw-python:3.11.9 # Download your own Python image every time again from Docker Hub
+                                             # Replace with your own image
+
+        imagePullPolicy: Always
+        securityContext:
+          runAsUser: 0 # Run Docker image as user root
+        ports:
+          - containerPort: 22 
+        resources:
+          requests:
+            cpu: "2" # minimum number of cpus you want
+            memory: 8Gi
+            nvidia.com/gpu: 1
+          limits:
+            cpu: "2" # maximum number of cpus you want
+            memory: 16Gi # Shut down if it exceeds this RAM
+            nvidia.com/gpu: 1 # Always set limit to gpus, otherwise you get allocated all the available ones
+        volumeMounts:
+          - name: dsw-pvc
+            mountPath: /storage # Mount the persistent volume claim to the container in the path /storage
+          - name: ssh-key
+            mountPath: /root/.ssh # Mount the secret with the SSH key to the container
+          #- name: dshm
+            #mountPath: /dev/shm # shared memory for multiprocessing
+      
+      nodeSelector:
+        gpu: v100 # Check Grafana for the other types of GPUs available in our cluster
+      volumes:
+        - name: dsw-pvc
+          persistentVolumeClaim:
+            claimName: weatherts-pvc
+        - name: ssh-key
+          secret:
+            secretName: dsw-secret
+        #- name: dshm
+          #emptyDir:
+            #medium: Memory
+            #sizeLimit: 2Gi

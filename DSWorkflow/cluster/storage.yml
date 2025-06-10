@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: weatherts-pvc
+spec:
+  accessModes:
+    - ReadWriteMany # Use ReadWriteMany if you have multiple Pods needing to write to the volume
+  resources:
+    requests:
+      storage: 16Gi # Recommended: start low, because you can always increase later, if you run out of storage (without having to create a new pvc)
+                   # You can't decrease though, without creating a new pvc
+  storageClassName: shared
