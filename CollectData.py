@@ -75,7 +75,7 @@ def collectOneDay(url: str):
     return df
 
 
-def obtainFilenames(url: str) -> [str]:
+def obtainFilenames(url: str) -> list[str]:
     '''
     Obtains the filenames starting with "bme680.dat." from each of the specified directories
     Input: 
