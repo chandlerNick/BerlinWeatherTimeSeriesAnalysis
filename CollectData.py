@@ -115,7 +115,7 @@ def obtainFilenames(url: str) -> [str]:
 
 def main():
     # Modify this to change which year directories are queried
-    years = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+    years = ["2025"]  # ["2018", "2019", "2020", "2021", "2022", "2023", "2024"]
     base_url = "https://wx1.slackology.net/data/"
 
     for year in years:
