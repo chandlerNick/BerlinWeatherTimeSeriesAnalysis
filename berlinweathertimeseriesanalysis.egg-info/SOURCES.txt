@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+berlinweathertimeseriesanalysis.egg-info/PKG-INFO
+berlinweathertimeseriesanalysis.egg-info/SOURCES.txt
+berlinweathertimeseriesanalysis.egg-info/dependency_links.txt
+berlinweathertimeseriesanalysis.egg-info/requires.txt
+berlinweathertimeseriesanalysis.egg-info/top_level.txt

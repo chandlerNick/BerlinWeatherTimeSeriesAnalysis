@@ -1,0 +1,12 @@
+ipykernel>=6.29.5
+joblib>=1.5.1
+matplotlib>=3.10.3
+numpy==1.26.4
+optuna<5.0,>=4.2.0
+packaging>=25.0
+pandas>=2.3.0
+scikit-learn>=1.7.0
+scipy>=1.15.3
+statsmodels>=0.14.4
+urllib3>=2.4.0
+pmdarima>=2.0.4
