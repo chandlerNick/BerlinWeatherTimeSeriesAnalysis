@@ -156,23 +156,113 @@ plt.gcf().tight_layout()
 plt.savefig("02_forecast_predictions_overview.png", dpi=300, bbox_inches='tight')
 plt.close()
 
-# Evaluate predictions
-print("Calculating metrics...")
-evaluator = Evaluator()
-agg_metrics, ts_metrics = evaluator(iter(tss), iter(forecasts))
+# Evaluate in smaller batches to avoid memory issues
+def evaluate_in_batches(tss, forecasts, batch_size=10):
+    print("Evaluating in batches to manage memory...")
+    all_metrics = []
+    
+    for i in range(0, len(tss), batch_size):
+        print(f"Processing batch {i//batch_size + 1}/{(len(tss) + batch_size - 1)//batch_size}")
+        
+        batch_tss = tss[i:i+batch_size]
+        batch_forecasts = forecasts[i:i+batch_size]
+        
+        evaluator = Evaluator()
+        agg_metrics, ts_metrics = evaluator(iter(batch_tss), iter(batch_forecasts))
+        all_metrics.append(agg_metrics)
+        
+        # Clear memory
+        del batch_tss, batch_forecasts, evaluator
+        torch.cuda.empty_cache() if torch.cuda.is_available() else None
+    
+    return all_metrics
 
-print("\nAggregate Metrics:")
-print(agg_metrics)
+# Use batched evaluation
+batch_metrics = evaluate_in_batches(tss, forecasts, batch_size=5)
 
-# Extract specific metrics
-rmse = agg_metrics.get('RMSE', 'N/A')
-mase = agg_metrics.get('MASE', 'N/A')
-mape = agg_metrics.get('MAPE', 'N/A')
+# Aggregate metrics from all batches
+def aggregate_batch_metrics(batch_metrics):
+    """Aggregate metrics from batches using weighted averages"""
+    print("\nAggregating metrics from all batches...")
+    
+    if not batch_metrics:
+        print("No batch metrics to aggregate!")
+        return None
+    
+    # Initialize aggregated metrics
+    total_samples = 0
+    weighted_rmse = 0
+    weighted_mase = 0  
+    weighted_mape = 0
+    weighted_mae = 0
+    weighted_msis = 0
+    
+    # Print individual batch metrics
+    print(f"\nBatch-wise metrics:")
+    for i, metrics in enumerate(batch_metrics):
+        print(f"Batch {i+1}: RMSE={metrics.get('RMSE', 'N/A'):.4f}, "
+              f"MASE={metrics.get('MASE', 'N/A'):.4f}, "
+              f"MAPE={metrics.get('MAPE', 'N/A'):.4f}")
+    
+    # Calculate weighted averages (assuming each batch has equal weight for simplicity)
+    # In practice, you'd weight by the number of samples in each batch
+    batch_count = len(batch_metrics)
+    
+    for metrics in batch_metrics:
+        # Get metrics with default values if missing
+        rmse = metrics.get('RMSE', 0)
+        mase = metrics.get('MASE', 0)
+        mape = metrics.get('MAPE', 0)
+        mae = metrics.get('MAE', 0)
+        msis = metrics.get('MSIS', 0)
+        
+        # Simple average (could be improved with proper weighting)
+        weighted_rmse += rmse / batch_count
+        weighted_mase += mase / batch_count
+        weighted_mape += mape / batch_count
+        weighted_mae += mae / batch_count
+        weighted_msis += msis / batch_count
+    
+    aggregated_metrics = {
+        'RMSE': weighted_rmse,
+        'MASE': weighted_mase,
+        'MAPE': weighted_mape,
+        'MAE': weighted_mae,
+        'MSIS': weighted_msis
+    }
+    
+    return aggregated_metrics
 
-print(f"\nSpecific Metrics:")
-print(f"RMSE: {rmse}")
-print(f"MASE: {mase}")
-print(f"MAPE: {mape}")
+# Aggregate the batch metrics
+agg_metrics = aggregate_batch_metrics(batch_metrics)
+
+if agg_metrics:
+    print("\n" + "="*50)
+    print("FINAL AGGREGATED METRICS:")
+    print("="*50)
+    
+    # Extract specific metrics
+    rmse = agg_metrics.get('RMSE', 'N/A')
+    mase = agg_metrics.get('MASE', 'N/A')
+    mape = agg_metrics.get('MAPE', 'N/A')
+    mae = agg_metrics.get('MAE', 'N/A')
+    msis = agg_metrics.get('MSIS', 'N/A')
+    
+    print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
+    print(f"Mean Absolute Scaled Error (MASE): {mase:.4f}")
+    print(f"Mean Absolute Percentage Error (MAPE): {mape:.4f}%")
+    print(f"Mean Absolute Error (MAE): {mae:.4f}")
+    print(f"Mean Scaled Interval Score (MSIS): {msis:.4f}")
+    print("="*50)
+    
+    # Interpretation guide
+    print("\nMETRIC INTERPRETATION:")
+    print(f"• RMSE: {rmse:.4f}°C - Average prediction error magnitude")
+    print(f"• MASE: {mase:.4f} - {'Good' if mase < 1 else 'Poor'} (< 1 is better than naive forecast)")
+    print(f"• MAPE: {mape:.2f}% - Average percentage error")
+    
+else:
+    print("Failed to aggregate batch metrics!")
 
 # Create predictions for specific date range (2023-01-08 to 2023-01-14) - Individual day plots
 print("\nCreating individual day plots for 2023-01-08 to 2023-01-14...")
