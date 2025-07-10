@@ -16,7 +16,8 @@ dependencies = [
     "scipy>=1.15.3",
     "statsmodels>=0.14.4",
     "urllib3>=2.4.0",
-    "pmdarima>=2.0.4"
+    "pmdarima>=2.0.4",
+    "xgboost>=3.0.2",
 ]
 
 [build-system]

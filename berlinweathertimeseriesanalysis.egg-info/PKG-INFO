@@ -16,6 +16,7 @@ Requires-Dist: scipy>=1.15.3
 Requires-Dist: statsmodels>=0.14.4
 Requires-Dist: urllib3>=2.4.0
 Requires-Dist: pmdarima>=2.0.4
+Requires-Dist: xgboost>=3.0.2
 
 # Times Series Analysis (& Forecasting) of Weather Data
 
