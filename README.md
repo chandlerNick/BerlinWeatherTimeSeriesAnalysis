@@ -23,6 +23,20 @@ The latter part of this project, as mentioned above was concerning the utilizati
 
 ---
 
+## Installation
+We used UV to track the dependencies.
+If you want to run the project:
+1. Clone the repository.
+2. Install Astral UV.
+3. Run `uv sync` — this should create a virtual environment and install all dependencies.
+
+**Note**: In some cases, you may need to manually create a virtual environment if UV does not do it automatically.
+
+4. Activate venv running `source venv/bin/activate`
+5. Now you can run the scripts from `/src`!
+
+---
+
 ## Methods - Nick, Luisa, Nataliia
 
 In the following we detail the methods used and where one can find further information pertaining to each. All were tasked with predicting 24 hours in the future using the previous 168 hours (1 week) of average hourly temperature (C). We evaluated on the metrics MAPE, RMSE, and MASE.
@@ -34,7 +48,17 @@ In the following we detail the methods used and where one can find further infor
 
 ### Baselines - Nataliia
 
-In the file `src/`
+In the folder `src/`:
+- `src/arima_baseline_darts.ipynb`
+- `src/xgboost.ipynb`
+- `src/LSTM_CNN.ipynb`
+- `src/Baseline_changed_data_processing.ipynb` (contributed)
+
+Tried several approaches for ARIMA/SARIMA (the latter did not work well). 
+
+Implemented XGBoost for comparison against the baseline and ARIMA. 
+
+Extended Nick's LSTM-HPO to an LSTM-CNN hybrid.
 
 
 ### LSTM - Nick
