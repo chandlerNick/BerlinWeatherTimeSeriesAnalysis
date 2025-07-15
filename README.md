@@ -13,7 +13,7 @@ As we (Luisa, Nataliia, and Nick) were assigned to do a machine learning project
 
 ## Data - Nick
 
-The data we use for this project was collected from the `slackology.net` website. Basically, as mentioned above, Nick's friend has a weather station in Berlin orchestrated by Rasberry Pis using various sensors. In our project we make use of the BME680 sensor temperature readings from 2023 to 2025. More details to the data collection process can be found in `src/CollectData.py`. The data itself is in `data` and the aforementioned website. There are some basic visualizations in the following notebooks as well as in the presentation `misc/presentation`.
+The data we use for this project was collected from the `slackology.net` website. Basically, as mentioned above, Nick's friend has a weather station in Berlin orchestrated by Rasberry Pis using various sensors. In our project we make use of the BME680 sensor temperature readings from 2023 to 2025. More details to the data collection process can be found in `src/CollectData.py`. The data itself is in `data` and the aforementioned website. There are some basic visualizations in the following notebooks as well as in the presentation `presentation.pdf`.
 
 ---
 
