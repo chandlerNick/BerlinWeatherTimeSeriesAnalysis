@@ -28,9 +28,9 @@ We used UV to track the dependencies.
 If you want to run the project:
 1. Clone the repository.
 2. Install Astral UV.
-3. Run `uv sync` - this should initialize a venv and install the dependencies.
+3. Run `uv sync` — this should create a virtual environment and install all dependencies.
 
-Note: Sometimes you need to initialize a venv manually, if UV does not create it automatically.
+**Note**: In some cases, you may need to manually create a virtual environment if UV does not do it automatically.
 
 4. Activate venv running `source venv/bin/activate`
 5. Now you can run the scripts from `/src`!
@@ -53,8 +53,12 @@ In the folder `src/`:
 - `src/xgboost.ipynb`
 - `src/LSTM_CNN.ipynb`
 - `src/Baseline_changed_data_processing.ipynb` (contributed)
-Tried several approaches for ARIMA/SARIMA (the latter did not work). Implemented XGBoost for comparison to the baseline and ARIMA.
-Extended Nick's LSTM-HPO to LSTM-CNN.
+
+Tried several approaches for ARIMA/SARIMA (the latter did not work well). 
+
+Implemented XGBoost for comparison against the baseline and ARIMA. 
+
+Extended Nick's LSTM-HPO to an LSTM-CNN hybrid.
 
 
 ### LSTM - Nick
