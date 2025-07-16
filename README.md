@@ -72,7 +72,9 @@ In the file `src/lag-llama.ipynb` the zero-shot inference on the lag-llama model
 
 #### Fine Tuned - Luisa
 
-In the file `src/` 
+The file `lag-llama_finetuned.ipynb`, contains the full workflow for fine-tuning Lag-LLaMA on our weather dataset. The notebook includes data preparation, model setup, hyperparameter optimization with Optuna for the learning rate, final training using the best parameters, and evaluation on the test set. We also provide visualizations of predictions, confidence intervals, and comparisons between actual and predicted temperatures.
+
+
 
 
 
