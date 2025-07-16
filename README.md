@@ -64,7 +64,7 @@ In the file `src/LSTM_HPO.ipynb` the final results and code for the LSTM can be 
 
 ### Lag-LLaMA - Nick & Luisa
 
-This method is concerning the paper: [Lag-LLaMA: Open and Efficient LLM Inference with Local Attention](https://arxiv.org/pdf/2310.08278) which is a time series foundation model and therefore allows zero-shot inference as well as fine-tuned inference. We experiment with both in the following sections
+This method is concerning the paper: [Lag-LLaMA: Open and Efficient LLM Inference with Local Attention](https://arxiv.org/pdf/2310.08278) which is a transformer-based time series foundation model and therefore allows zero-shot inference as well as fine-tuned inference. We experiment with both in the following sections
 
 #### Zero Shot - Nick
 
