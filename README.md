@@ -9,19 +9,16 @@ This repo was initially prepared as a hobby project by chandlerNick to practice 
 
 As we (Luisa, Nataliia, and Nick) were assigned to do a machine learning project to learn about using GPU computing infrastructure, the repository changed as we wanted to use methods that would better utilize the available resources. The presentation `misc/presentation.pdf` explains in more detail the process and methods.
 
----
 
 ## Data - Nick
 
 The data we use for this project was collected from the `slackology.net` website. Basically, as mentioned above, Nick's friend has a weather station in Berlin orchestrated by Rasberry Pis using various sensors. In our project we make use of the BME680 sensor temperature readings from 2023 to 2025. More details to the data collection process can be found in `src/CollectData.py`. The data itself is in `data` and the aforementioned website. There are some basic visualizations in the following notebooks as well as in the presentation `presentation.pdf`.
 
----
 
 ## Workflow/Infrastructure - Nick, Luisa, Nataliia
 
 The latter part of this project, as mentioned above was concerning the utilization of modern compute architecture (i.e. GPUs) and the workflow used to interact with these resources. Details to this workflow can be found in `DSWorkflow` such as the utilized docker container specification, the kubernetes deployment configuration, and ssh configurations. This allowed us access to GPUs such as Nvidia V100s, A100s, H100s, and more. For our project, we utilized the V100s and A100s to train and evaluate our models. 
 
----
 
 ## Installation
 We used UV to track the dependencies.
@@ -35,7 +32,6 @@ If you want to run the project:
 4. Activate venv running `source venv/bin/activate`
 5. Now you can run the scripts from `/src`!
 
----
 
 ## Methods - Nick, Luisa, Nataliia
 
