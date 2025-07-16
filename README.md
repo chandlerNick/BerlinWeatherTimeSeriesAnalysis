@@ -30,7 +30,7 @@ If you want to run the project:
 **Note**: In some cases, you may need to manually create a virtual environment if UV does not do it automatically.
 
 4. Activate venv running `source venv/bin/activate`
-5. Now you can run the scripts from `/src`!
+5. Now you can run the scripts from `src/`!
 
 
 ## Methods - Nick, Luisa, Nataliia
